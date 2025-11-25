@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chat_detail_screen.dart';
 
 class ChatHomeScreen extends StatelessWidget {
   const ChatHomeScreen({super.key});
@@ -151,6 +152,7 @@ class ChatHomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 80),
               children: [
                 chatTile(
+                    context: context,
                     name: "Putra Alif",
                     message: "lagi dimana?",
                     time: "19.20",
@@ -158,12 +160,14 @@ class ChatHomeScreen extends StatelessWidget {
                     unread: 2,
                     delivered: true),
                 chatTile(
+                    context: context,
                     name: "Salsa",
                     message: "iyaaa besok ya",
                     time: "18.55",
                     imagePath: "assets/images/salsa.jpg",
                     unread: 1),
                 chatTile(
+                    context: context,
                     name: "Dewi",
                     message: "udah aku kirim fotonya",
                     time: "18.20",
@@ -171,28 +175,33 @@ class ChatHomeScreen extends StatelessWidget {
                     unread: 3,
                     imagePath: "assets/images/dewi.jpg"),
                 chatTile(
+                    context: context,
                     name: "Fajar",
                     message: "otw rumah",
                     time: "17.40",
                     imagePath: "assets/images/fajar.jpg"),
                 chatTile(
+                    context: context,
                     name: "Nadya",
                     message: "bsk jadi kan?",
                     time: "17.15",
                     unread: 1,
                     imagePath: "assets/images/nadya.jpg"),
                 chatTile(
+                    context: context,
                     name: "Adit",
                     message: "okeh siap",
                     time: "16.50",
                     imagePath: "assets/images/adit.jpg"),
                 chatTile(
+                    context: context,
                     name: "Rizka",
                     message: "mana tugasnyaa",
                     time: "16.02",
                     unread: 5,
                     imagePath: "assets/images/rizka.jpg"),
                 chatTile(
+                    context: context,
                     name: "Bagas",
                     message: "makasih yaa",
                     time: "15.33",
@@ -240,9 +249,10 @@ class ChatHomeScreen extends StatelessWidget {
   }
 
   // ============================================================
-  // COMPONENT: CHAT TILE
+  // COMPONENT: CHAT TILE (SUDAH ADA onTap)
   // ============================================================
   Widget chatTile({
+    required BuildContext context,
     required String name,
     required String message,
     required String time,
@@ -254,6 +264,18 @@ class ChatHomeScreen extends StatelessWidget {
     int unread = 0,
   }) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatDetailScreen(
+              name: name,
+              message: message,
+              image: imagePath ?? "",
+            ),
+          ),
+        );
+      },
       leading: CircleAvatar(
         radius: 26,
         backgroundColor: Colors.grey,
